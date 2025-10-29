@@ -1,0 +1,53 @@
+# Render Blueprint for Golf Course Management System
+# This file enables "Infrastructure as Code" deployment on Render
+
+services:
+  # Backend API Service
+  - type: web
+    name: golf-course-backend
+    runtime: go
+    region: oregon # Change to your preferred region
+    plan: free # Change to 'starter' for production
+    rootDir: backend
+    buildCommand: go build -o main
+    startCommand: ./main
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: GIN_MODE
+        value: release
+      - key: DB_HOST
+        sync: false # Set manually in Render dashboard
+      - key: DB_PORT
+        value: 5432
+      - key: DB_USER
+        sync: false # Set manually
+      - key: DB_PASSWORD
+        sync: false # Set manually (secret)
+      - key: DB_NAME
+        value: golf_course
+      - key: JWT_SECRET
+        sync: false # Set manually (secret)
+      - key: ALLOWED_ORIGINS
+        sync: false # Set to your Vercel URL
+      - key: DB_MAX_IDLE_CONNS
+        value: 10
+      - key: DB_MAX_OPEN_CONNS
+        value: 100
+    autoDeploy: true # Auto-deploy on git push
+
+databases:
+  # PostgreSQL Database (if using Render's database)
+  - name: golf-course-db
+    region: oregon # Same region as backend
+    plan: free # Change to 'starter' for production (10GB, better backups)
+    databaseName: golf_course
+    user: golf_user
+    ipAllowList: [] # Empty = allow from Render services only
+
+# Note: You'll need to:
+# 1. Push this file to your repository
+# 2. Connect your repo to Render
+# 3. Render will automatically create these services
+# 4. Set the secret environment variables manually in the dashboard

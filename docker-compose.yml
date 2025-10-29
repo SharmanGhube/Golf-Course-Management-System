@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: golf_course_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: golf_course_db
+      MYSQL_USER: golf_user
+      MYSQL_PASSWORD: golf_password
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - golf_network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: golf_course_backend
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_USER=golf_user
+      - DB_PASSWORD=golf_password
+      - DB_NAME=golf_course_db
+    depends_on:
+      - mysql
+    networks:
+      - golf_network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: golf_course_frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8080/api/v1
+    depends_on:
+      - backend
+    networks:
+      - golf_network
+
+volumes:
+  mysql_data:
+
+networks:
+  golf_network:
+    driver: bridge

@@ -1,0 +1,33 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Documentation
+README.md
+*.md
+docs/
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# Testing
+*_test.go
+testdata/
+coverage/
+
+# Build artifacts
+main
+*.exe
+
+# Uploads (don't include in image)
+uploads/*
+!uploads/.gitkeep
