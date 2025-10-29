@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useAuthStore } from '@/lib/auth'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useQuery, useMutation, useQueryClient } from 'react-query'
 import { Calendar, Clock, Users, DollarSign, MapPin, Check } from 'lucide-react'
 import { motion } from 'framer-motion'
@@ -44,10 +44,17 @@ interface Course {
 export default function BookingPage() {
   const { isAuthenticated, user, token } = useAuthStore()
   const router = useRouter()
+  const searchParams = useSearchParams()
   const queryClient = useQueryClient()
   
+  // Get course ID from URL params if coming from courses page
+  const courseIdFromUrl = searchParams.get('courseId')
+  const courseNameFromUrl = searchParams.get('courseName')
+  
   const [selectedDate, setSelectedDate] = useState(format(new Date(), 'yyyy-MM-dd'))
-  const [selectedCourse, setSelectedCourse] = useState<number | null>(null)
+  const [selectedCourse, setSelectedCourse] = useState<number | null>(
+    courseIdFromUrl ? parseInt(courseIdFromUrl) : null
+  )
   const [selectedTeeTime, setSelectedTeeTime] = useState<TeeTime | null>(null)
   const [playerCount, setPlayerCount] = useState(1)
 
@@ -56,6 +63,13 @@ export default function BookingPage() {
       router.push('/login')
     }
   }, [isAuthenticated, router])
+
+  // Set course from URL param when courses data is loaded
+  useEffect(() => {
+    if (courseIdFromUrl && !selectedCourse) {
+      setSelectedCourse(parseInt(courseIdFromUrl))
+    }
+  }, [courseIdFromUrl, selectedCourse])
 
   // Fetch courses
   const { data: courses } = useQuery<Course[]>(

@@ -3,6 +3,9 @@
 import { useQuery } from 'react-query'
 import { MapPin, Star, DollarSign, Users, Clock, Target } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import toast from 'react-hot-toast'
 
 interface Course {
   id: number
@@ -21,6 +24,8 @@ interface Course {
 }
 
 export default function CoursesPage() {
+  const router = useRouter()
+  
   const { data: courses, isLoading, error } = useQuery<Course[]>(
     'courses',
     async () => {
@@ -31,6 +36,21 @@ export default function CoursesPage() {
       return response.json()
     }
   )
+
+  const handleViewDetails = (courseId: number) => {
+    toast.success('Viewing course details')
+    // You can navigate to a dedicated course details page if you create one
+    // router.push(`/courses/${courseId}`)
+  }
+
+  const handleBookTeeTime = (courseId: number, courseName: string) => {
+    router.push(`/booking?courseId=${courseId}&courseName=${encodeURIComponent(courseName)}`)
+  }
+
+  const handleViewMap = (courseId: number, courseName: string) => {
+    toast.success(`Course map for ${courseName} - Coming soon!`)
+    // You could open a modal or navigate to a map page
+  }
 
   if (isLoading) {
     return (
@@ -195,7 +215,10 @@ export default function CoursesPage() {
 
                 {/* Action Buttons */}
                 <div className="space-y-3">
-                  <button className="w-full btn-primary group-hover:bg-green-500 transition-colors">
+                  <button 
+                    onClick={() => handleViewDetails(course.id)}
+                    className="w-full btn-primary group-hover:bg-green-500 transition-colors"
+                  >
                     <span className="flex items-center justify-center space-x-2">
                       <span>View Course Details</span>
                       <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -205,10 +228,16 @@ export default function CoursesPage() {
                   </button>
                   
                   <div className="grid grid-cols-2 gap-2">
-                    <button className="btn-outline text-xs py-2">
+                    <button 
+                      onClick={() => handleBookTeeTime(course.id, course.name)}
+                      className="btn-outline text-xs py-2 hover:bg-green-600 hover:text-white hover:border-green-600"
+                    >
                       Book Tee Time
                     </button>
-                    <button className="btn-secondary text-xs py-2">
+                    <button 
+                      onClick={() => handleViewMap(course.id, course.name)}
+                      className="btn-secondary text-xs py-2 hover:bg-dark-600"
+                    >
                       Course Map
                     </button>
                   </div>
