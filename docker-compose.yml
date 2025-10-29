@@ -30,6 +30,11 @@ services:
       - DB_USER=golf_user
       - DB_PASSWORD=golf_password
       - DB_NAME=golf_course_db
+      - JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
+      - WEATHER_API_KEY=0b2f50909df047d1aef113049250109
+      - PORT=8080
+      - GIN_MODE=debug
+      - FRONTEND_URL=http://localhost:3000
     depends_on:
       - mysql
     networks:
