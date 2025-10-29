@@ -62,6 +62,7 @@ export default function AdminPage() {
       return;
     }
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, token]);
 
   const fetchData = async () => {
