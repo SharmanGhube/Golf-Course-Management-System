@@ -63,24 +63,22 @@ export default function LoginPage() {
           <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
             {/* Email Field */}
             <div>
-              <label className="form-label">Email Address</label>
-              <div className="relative">
-                <div className="form-icon-left">
-                  <Mail className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  {...register('email', {
-                    required: 'Email is required',
-                    pattern: {
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: 'Invalid email address',
-                    },
-                  })}
-                  type="email"
-                  className="form-input-with-icon"
-                  placeholder="Enter your email"
-                />
-              </div>
+              <label className="form-label flex items-center gap-2">
+                <Mail className="h-4 w-4 text-green-400" />
+                Email Address
+              </label>
+              <input
+                {...register('email', {
+                  required: 'Email is required',
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: 'Invalid email address',
+                  },
+                })}
+                type="email"
+                className="form-input"
+                placeholder="Enter your email"
+              />
               {errors.email && (
                 <p className="mt-1 text-sm text-red-400">{errors.email.message}</p>
               )}
@@ -88,28 +86,28 @@ export default function LoginPage() {
 
             {/* Password Field */}
             <div>
-              <label className="form-label">Password</label>
+              <label className="form-label flex items-center gap-2">
+                <Lock className="h-4 w-4 text-green-400" />
+                Password
+              </label>
               <div className="relative">
-                <div className="form-icon-left">
-                  <Lock className="h-5 w-5 text-gray-400" />
-                </div>
                 <input
                   {...register('password', {
                     required: 'Password is required',
                   })}
                   type={showPassword ? 'text' : 'password'}
-                  className="form-input-with-icons"
+                  className="form-input pr-12"
                   placeholder="Enter your password"
                 />
                 <button
                   type="button"
-                  className="form-icon-right"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-300 transition-colors"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
-                    <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-300" />
+                    <EyeOff className="h-5 w-5" />
                   ) : (
-                    <Eye className="h-5 w-5 text-gray-400 hover:text-gray-300" />
+                    <Eye className="h-5 w-5" />
                   )}
                 </button>
               </div>

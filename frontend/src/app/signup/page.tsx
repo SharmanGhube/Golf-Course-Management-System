@@ -70,44 +70,40 @@ export default function SignupPage() {
         </div>
 
         <div className="card">
-          <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+          <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
             {/* Name Fields */}
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="form-label">First Name</label>
-                <div className="relative">
-                  <div className="form-icon-left">
-                    <User className="h-5 w-5 text-gray-400" />
-                  </div>
-                  <input
-                    {...register('first_name', {
-                      required: 'First name is required',
-                    })}
-                    type="text"
-                    className="form-input-with-icon"
-                    placeholder="First name"
-                  />
-                </div>
+                <label className="form-label flex items-center gap-2">
+                  <User className="h-4 w-4 text-green-400" />
+                  First Name
+                </label>
+                <input
+                  {...register('first_name', {
+                    required: 'First name is required',
+                  })}
+                  type="text"
+                  className="form-input"
+                  placeholder="First name"
+                />
                 {errors.first_name && (
                   <p className="mt-1 text-sm text-red-400">{errors.first_name.message}</p>
                 )}
               </div>
 
               <div>
-                <label className="form-label">Last Name</label>
-                <div className="relative">
-                  <div className="form-icon-left">
-                    <User className="h-5 w-5 text-gray-400" />
-                  </div>
-                  <input
-                    {...register('last_name', {
-                      required: 'Last name is required',
-                    })}
-                    type="text"
-                    className="form-input-with-icon"
-                    placeholder="Last name"
-                  />
-                </div>
+                <label className="form-label flex items-center gap-2">
+                  <User className="h-4 w-4 text-green-400" />
+                  Last Name
+                </label>
+                <input
+                  {...register('last_name', {
+                    required: 'Last name is required',
+                  })}
+                  type="text"
+                  className="form-input"
+                  placeholder="Last name"
+                />
                 {errors.last_name && (
                   <p className="mt-1 text-sm text-red-400">{errors.last_name.message}</p>
                 )}
@@ -116,24 +112,22 @@ export default function SignupPage() {
 
             {/* Email Field */}
             <div>
-              <label className="form-label">Email Address</label>
-              <div className="relative">
-                <div className="form-icon-left">
-                  <Mail className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  {...register('email', {
-                    required: 'Email is required',
-                    pattern: {
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: 'Invalid email address',
-                    },
-                  })}
-                  type="email"
-                  className="form-input-with-icon"
-                  placeholder="Enter your email"
-                />
-              </div>
+              <label className="form-label flex items-center gap-2">
+                <Mail className="h-4 w-4 text-green-400" />
+                Email Address
+              </label>
+              <input
+                {...register('email', {
+                  required: 'Email is required',
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: 'Invalid email address',
+                  },
+                })}
+                type="email"
+                className="form-input"
+                placeholder="Enter your email"
+              />
               {errors.email && (
                 <p className="mt-1 text-sm text-red-400">{errors.email.message}</p>
               )}
@@ -141,42 +135,38 @@ export default function SignupPage() {
 
             {/* Phone Field */}
             <div>
-              <label className="form-label">Phone Number</label>
-              <div className="relative">
-                <div className="form-icon-left">
-                  <Phone className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  {...register('phone')}
-                  type="tel"
-                  className="form-input-with-icon"
-                  placeholder="Your phone number"
-                />
-              </div>
+              <label className="form-label flex items-center gap-2">
+                <Phone className="h-4 w-4 text-green-400" />
+                Phone Number
+              </label>
+              <input
+                {...register('phone')}
+                type="tel"
+                className="form-input"
+                placeholder="Your phone number"
+              />
             </div>
 
             {/* Date of Birth */}
             <div>
-              <label className="form-label">Date of Birth</label>
-              <div className="relative">
-                <div className="form-icon-left">
-                  <Calendar className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  {...register('date_of_birth')}
-                  type="date"
-                  className="form-input-with-icon"
-                />
-              </div>
+              <label className="form-label flex items-center gap-2">
+                <Calendar className="h-4 w-4 text-green-400" />
+                Date of Birth
+              </label>
+              <input
+                {...register('date_of_birth')}
+                type="date"
+                className="form-input"
+              />
             </div>
 
             {/* Password Fields */}
             <div>
-              <label className="form-label">Password</label>
+              <label className="form-label flex items-center gap-2">
+                <Lock className="h-4 w-4 text-green-400" />
+                Password
+              </label>
               <div className="relative">
-                <div className="form-icon-left">
-                  <Lock className="h-5 w-5 text-gray-400" />
-                </div>
                 <input
                   {...register('password', {
                     required: 'Password is required',
@@ -186,18 +176,18 @@ export default function SignupPage() {
                     },
                   })}
                   type={showPassword ? 'text' : 'password'}
-                  className="form-input-with-icons"
+                  className="form-input pr-12"
                   placeholder="Create a password"
                 />
                 <button
                   type="button"
-                  className="form-icon-right"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-300 transition-colors"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
-                    <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-300" />
+                    <EyeOff className="h-5 w-5" />
                   ) : (
-                    <Eye className="h-5 w-5 text-gray-400 hover:text-gray-300" />
+                    <Eye className="h-5 w-5" />
                   )}
                 </button>
               </div>
@@ -207,11 +197,11 @@ export default function SignupPage() {
             </div>
 
             <div>
-              <label className="form-label">Confirm Password</label>
+              <label className="form-label flex items-center gap-2">
+                <Lock className="h-4 w-4 text-green-400" />
+                Confirm Password
+              </label>
               <div className="relative">
-                <div className="form-icon-left">
-                  <Lock className="h-5 w-5 text-gray-400" />
-                </div>
                 <input
                   {...register('confirmPassword', {
                     required: 'Please confirm your password',
@@ -219,18 +209,18 @@ export default function SignupPage() {
                       value === password || 'Passwords do not match',
                   })}
                   type={showConfirmPassword ? 'text' : 'password'}
-                  className="form-input-with-icons"
+                  className="form-input pr-12"
                   placeholder="Confirm your password"
                 />
                 <button
                   type="button"
-                  className="form-icon-right"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-300 transition-colors"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 >
                   {showConfirmPassword ? (
-                    <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-300" />
+                    <EyeOff className="h-5 w-5" />
                   ) : (
-                    <Eye className="h-5 w-5 text-gray-400 hover:text-gray-300" />
+                    <Eye className="h-5 w-5" />
                   )}
                 </button>
               </div>
