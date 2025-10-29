@@ -2,6 +2,24 @@
 
 A comprehensive golf course management web application built with Next.js, Go, and MySQL. This system provides a complete solution for managing golf course operations including tee time bookings, equipment rentals, driving range sessions, and member management.
 
+## 🖥️ Quick Start - Run Locally
+
+**No deployment needed!** Just run on your computer:
+
+```powershell
+# 1. Make sure Docker Desktop is running
+
+# 2. Start the application
+docker-compose up --build
+
+# 3. Open your browser
+# Frontend: http://localhost:3000
+# Backend: http://localhost:8080
+# Health: http://localhost:8080/health
+```
+
+**👉 For detailed instructions, see [RUN_LOCALLY.md](RUN_LOCALLY.md)**
+
 ## 🎯 Features
 
 ### Core Functionality
