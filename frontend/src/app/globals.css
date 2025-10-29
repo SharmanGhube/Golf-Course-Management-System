@@ -127,8 +127,8 @@ a {
 
 /* Form styles */
 .form-input {
-  @apply w-full px-3 py-2.5 bg-dark-800 border border-dark-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent transition-all duration-200;
-  min-height: 44px; /* Ensure consistent height for icon alignment */
+  @apply w-full px-4 py-3 bg-dark-800 border border-dark-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent transition-all duration-200;
+  min-height: 48px; /* Increased height for better spacing */
 }
 
 .form-label {
@@ -137,16 +137,19 @@ a {
 
 /* Icon positioning for form fields */
 .form-input-with-icon {
-  @apply form-input pl-10;
+  @apply form-input pl-12; /* Increased left padding for icon */
 }
 
 .form-input-with-icons {
-  @apply form-input pl-10 pr-12;
+  @apply form-input pl-12 pr-12; /* Increased padding on both sides */
 }
 
 .form-icon-left {
-  @apply absolute top-0 bottom-0 left-0 pl-3 flex items-center pointer-events-none;
-  height: 44px; /* Match input height */
+  @apply absolute left-0 flex items-center pointer-events-none;
+  top: 50%;
+  transform: translateY(-50%); /* Vertically center the icon */
+  padding-left: 1rem; /* 16px - matches the input's left padding space */
+  height: 20px; /* Icon container height */
 }
 
 .form-icon-right {
