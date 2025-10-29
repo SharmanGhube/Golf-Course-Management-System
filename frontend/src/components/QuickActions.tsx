@@ -47,6 +47,11 @@ export default function QuickActions() {
     !action.authRequired || isAuthenticated
   )
 
+  // Determine grid columns based on number of cards
+  const gridCols = filteredActions.length === 3 
+    ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' 
+    : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4'
+
   return (
     <section className="py-16">
       <div className="container mx-auto px-4">
@@ -65,7 +70,7 @@ export default function QuickActions() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className={`grid ${gridCols} gap-6 max-w-6xl mx-auto`}>
           {filteredActions.map((action, index) => {
             const Icon = action.icon
             return (
