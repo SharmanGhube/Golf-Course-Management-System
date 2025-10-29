@@ -132,7 +132,7 @@ export default function CoursesPage() {
         </motion.div>
 
         {/* Courses Grid */}
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-6 max-w-[1600px] mx-auto">
           {courses?.map((course, index) => {
             const isExpanded = expandedCourse === course.id
             
@@ -141,56 +141,57 @@ export default function CoursesPage() {
                 key={course.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="group bg-dark-900 rounded-xl border border-dark-700 overflow-hidden hover:border-green-500 hover:shadow-2xl hover:shadow-green-500/10 transition-all duration-300"
+                transition={{ delay: index * 0.05 }}
+                layout
+                className="group bg-dark-900 rounded-xl border border-dark-700 overflow-hidden hover:border-green-500 hover:shadow-xl hover:shadow-green-500/10 transition-all duration-300"
               >
                 {/* Course Header with Gradient */}
                 <div className="relative">
-                  <div className="h-32 bg-gradient-to-br from-green-600 via-green-700 to-green-800 relative overflow-hidden">
+                  <div className="h-28 bg-gradient-to-br from-green-600 via-green-700 to-green-800 relative overflow-hidden">
                     {/* Background Pattern */}
                     <div className="absolute inset-0 bg-black/20">
                       <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
                     </div>
                     
                     {/* Course Title Overlay */}
-                    <div className="absolute inset-0 flex items-center justify-between p-6">
-                      <div>
-                        <h2 className="text-2xl font-bold text-white drop-shadow-lg">{course.name}</h2>
-                        <p className="text-green-100 text-sm mt-1">Click &quot;View Details&quot; to see more</p>
+                    <div className="absolute inset-0 flex items-center justify-between px-5 py-4">
+                      <div className="flex-1 min-w-0">
+                        <h2 className="text-xl font-bold text-white drop-shadow-lg truncate">{course.name}</h2>
+                        <p className="text-green-100 text-xs mt-1">Click &quot;View Details&quot; to see more</p>
                       </div>
                       {course.course_rating && (
-                        <div className="flex items-center space-x-1 bg-yellow-500/90 text-yellow-900 px-3 py-1 rounded-full backdrop-blur-sm">
-                          <Star size={16} fill="currentColor" />
-                          <span className="text-sm font-bold">{course.course_rating}</span>
+                        <div className="flex items-center space-x-1 bg-yellow-500/90 text-yellow-900 px-2.5 py-1 rounded-full backdrop-blur-sm ml-3 flex-shrink-0">
+                          <Star size={14} fill="currentColor" />
+                          <span className="text-xs font-bold">{course.course_rating}</span>
                         </div>
                       )}
                     </div>
                   </div>
                 </div>
 
-                <div className="p-6">
+                <div className="p-5">
                   {/* Compact Summary View (Always Visible) */}
-                  <div className="mb-4">
-                    <p className="text-gray-400 text-sm line-clamp-2">{course.description}</p>
+                  <div className="mb-3">
+                    <p className="text-gray-400 text-sm line-clamp-2 leading-relaxed">{course.description}</p>
                   </div>
 
                   {/* Quick Stats (Always Visible) */}
                   <div className="grid grid-cols-4 gap-2 mb-4">
-                    <div className="text-center bg-dark-800/50 rounded-lg p-2">
-                      <div className="text-lg font-bold text-green-400">{course.par}</div>
-                      <div className="text-xs text-gray-400">Par</div>
+                    <div className="text-center bg-dark-800/50 rounded-lg p-2.5">
+                      <div className="text-base font-bold text-green-400">{course.par}</div>
+                      <div className="text-[10px] text-gray-400 uppercase tracking-wide">Par</div>
                     </div>
-                    <div className="text-center bg-dark-800/50 rounded-lg p-2">
-                      <div className="text-lg font-bold text-blue-400">{course.total_holes}</div>
-                      <div className="text-xs text-gray-400">Holes</div>
+                    <div className="text-center bg-dark-800/50 rounded-lg p-2.5">
+                      <div className="text-base font-bold text-blue-400">{course.total_holes}</div>
+                      <div className="text-[10px] text-gray-400 uppercase tracking-wide">Holes</div>
                     </div>
-                    <div className="text-center bg-dark-800/50 rounded-lg p-2">
-                      <div className="text-lg font-bold text-green-400">${course.green_fee}</div>
-                      <div className="text-xs text-gray-400">Green</div>
+                    <div className="text-center bg-dark-800/50 rounded-lg p-2.5">
+                      <div className="text-base font-bold text-green-400">${course.green_fee}</div>
+                      <div className="text-[10px] text-gray-400 uppercase tracking-wide">Green</div>
                     </div>
-                    <div className="text-center bg-dark-800/50 rounded-lg p-2">
-                      <div className="text-lg font-bold text-purple-400">${course.cart_fee}</div>
-                      <div className="text-xs text-gray-400">Cart</div>
+                    <div className="text-center bg-dark-800/50 rounded-lg p-2.5">
+                      <div className="text-base font-bold text-purple-400">${course.cart_fee}</div>
+                      <div className="text-[10px] text-gray-400 uppercase tracking-wide">Cart</div>
                     </div>
                   </div>
 
@@ -201,76 +202,76 @@ export default function CoursesPage() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.25 }}
                         className="overflow-hidden"
                       >
-                        <div className="space-y-4 mb-4 pt-2 border-t border-dark-700">
+                        <div className="space-y-3 mb-4 pt-3 border-t border-dark-700">
                           {/* Full Description */}
                           <div>
-                            <h3 className="text-sm font-semibold text-green-400 mb-2">Full Description</h3>
+                            <h3 className="text-xs font-semibold text-green-400 mb-1.5 uppercase tracking-wide">Description</h3>
                             <p className="text-gray-400 text-sm leading-relaxed">{course.description}</p>
                           </div>
 
                           {/* Detailed Stats */}
-                          <div className="grid grid-cols-2 gap-3">
-                            <div className="bg-gradient-to-br from-dark-800 to-dark-700 rounded-lg p-4 border border-dark-600">
-                              <div className="flex items-center space-x-2 mb-2">
-                                <Target className="text-green-400" size={18} />
-                                <span className="text-xs font-medium text-gray-300 uppercase tracking-wide">Par</span>
+                          <div className="grid grid-cols-2 gap-2.5">
+                            <div className="bg-gradient-to-br from-dark-800 to-dark-700 rounded-lg p-3 border border-dark-600">
+                              <div className="flex items-center space-x-2 mb-1.5">
+                                <Target className="text-green-400" size={16} />
+                                <span className="text-[10px] font-medium text-gray-300 uppercase tracking-wide">Par</span>
                               </div>
-                              <div className="text-2xl font-bold text-white">{course.par}</div>
+                              <div className="text-xl font-bold text-white">{course.par}</div>
                             </div>
                             
-                            <div className="bg-gradient-to-br from-dark-800 to-dark-700 rounded-lg p-4 border border-dark-600">
-                              <div className="flex items-center space-x-2 mb-2">
-                                <Users className="text-blue-400" size={18} />
-                                <span className="text-xs font-medium text-gray-300 uppercase tracking-wide">Holes</span>
+                            <div className="bg-gradient-to-br from-dark-800 to-dark-700 rounded-lg p-3 border border-dark-600">
+                              <div className="flex items-center space-x-2 mb-1.5">
+                                <Users className="text-blue-400" size={16} />
+                                <span className="text-[10px] font-medium text-gray-300 uppercase tracking-wide">Holes</span>
                               </div>
-                              <div className="text-2xl font-bold text-white">{course.total_holes}</div>
+                              <div className="text-xl font-bold text-white">{course.total_holes}</div>
                             </div>
                             
-                            <div className="bg-gradient-to-br from-dark-800 to-dark-700 rounded-lg p-4 border border-dark-600">
-                              <div className="flex items-center space-x-2 mb-2">
-                                <DollarSign className="text-green-400" size={18} />
-                                <span className="text-xs font-medium text-gray-300 uppercase tracking-wide">Green Fee</span>
+                            <div className="bg-gradient-to-br from-dark-800 to-dark-700 rounded-lg p-3 border border-dark-600">
+                              <div className="flex items-center space-x-2 mb-1.5">
+                                <DollarSign className="text-green-400" size={16} />
+                                <span className="text-[10px] font-medium text-gray-300 uppercase tracking-wide">Green Fee</span>
                               </div>
-                              <div className="text-xl font-bold text-green-400">${course.green_fee}</div>
+                              <div className="text-lg font-bold text-green-400">${course.green_fee}</div>
                             </div>
                             
-                            <div className="bg-gradient-to-br from-dark-800 to-dark-700 rounded-lg p-4 border border-dark-600">
-                              <div className="flex items-center space-x-2 mb-2">
-                                <Clock className="text-purple-400" size={18} />
-                                <span className="text-xs font-medium text-gray-300 uppercase tracking-wide">Cart Fee</span>
+                            <div className="bg-gradient-to-br from-dark-800 to-dark-700 rounded-lg p-3 border border-dark-600">
+                              <div className="flex items-center space-x-2 mb-1.5">
+                                <Clock className="text-purple-400" size={16} />
+                                <span className="text-[10px] font-medium text-gray-300 uppercase tracking-wide">Cart Fee</span>
                               </div>
-                              <div className="text-xl font-bold text-purple-400">${course.cart_fee}</div>
+                              <div className="text-lg font-bold text-purple-400">${course.cart_fee}</div>
                             </div>
                           </div>
 
                           {/* Course Details */}
-                          <div className="space-y-3">
-                            <div className="flex items-center space-x-3 text-gray-400 bg-dark-800/50 rounded-lg p-3">
-                              <MapPin size={16} className="text-green-400 flex-shrink-0" />
-                              <span className="text-sm">{course.address}</span>
+                          <div className="space-y-2">
+                            <div className="flex items-start space-x-2 text-gray-400 bg-dark-800/50 rounded-lg p-2.5">
+                              <MapPin size={14} className="text-green-400 flex-shrink-0 mt-0.5" />
+                              <span className="text-xs leading-relaxed">{course.address}</span>
                             </div>
                             
                             {course.slope_rating && (
-                              <div className="flex items-center justify-between bg-dark-800/50 rounded-lg p-3">
-                                <span className="text-sm text-gray-400">Slope Rating</span>
-                                <span className="text-sm font-semibold text-white bg-blue-500/20 px-2 py-1 rounded">{course.slope_rating}</span>
+                              <div className="flex items-center justify-between bg-dark-800/50 rounded-lg p-2.5">
+                                <span className="text-xs text-gray-400">Slope Rating</span>
+                                <span className="text-xs font-semibold text-white bg-blue-500/20 px-2 py-0.5 rounded">{course.slope_rating}</span>
                               </div>
                             )}
 
                             {course.phone && (
-                              <div className="flex items-center justify-between bg-dark-800/50 rounded-lg p-3">
-                                <span className="text-sm text-gray-400">Phone</span>
-                                <span className="text-sm font-semibold text-white">{course.phone}</span>
+                              <div className="flex items-center justify-between bg-dark-800/50 rounded-lg p-2.5">
+                                <span className="text-xs text-gray-400">Phone</span>
+                                <span className="text-xs font-semibold text-white">{course.phone}</span>
                               </div>
                             )}
 
                             {course.email && (
-                              <div className="flex items-center justify-between bg-dark-800/50 rounded-lg p-3">
-                                <span className="text-sm text-gray-400">Email</span>
-                                <span className="text-sm font-semibold text-white">{course.email}</span>
+                              <div className="flex items-center justify-between bg-dark-800/50 rounded-lg p-2.5">
+                                <span className="text-xs text-gray-400">Email</span>
+                                <span className="text-xs font-semibold text-white">{course.email}</span>
                               </div>
                             )}
                           </div>
@@ -280,13 +281,13 @@ export default function CoursesPage() {
                   </AnimatePresence>
 
                   {/* Action Buttons */}
-                  <div className="space-y-3">
+                  <div className="space-y-2.5">
                     <button 
                       onClick={() => handleViewDetails(course.id)}
-                      className="w-full btn-primary group-hover:bg-green-500 transition-colors"
+                      className="w-full btn-primary group-hover:bg-green-500 transition-colors py-2.5"
                     >
                       <span className="flex items-center justify-center space-x-2">
-                        <span>{isExpanded ? 'Hide Details' : 'View Course Details'}</span>
+                        <span className="text-sm">{isExpanded ? 'Hide Details' : 'View Course Details'}</span>
                         {isExpanded ? (
                           <ChevronUp className="w-4 h-4" />
                         ) : (
@@ -298,13 +299,13 @@ export default function CoursesPage() {
                     <div className="grid grid-cols-2 gap-2">
                       <button 
                         onClick={() => handleBookTeeTime(course.id, course.name)}
-                        className="btn-outline text-xs py-2 hover:bg-green-600 hover:text-white hover:border-green-600"
+                        className="btn-outline text-xs py-2 hover:bg-green-600 hover:text-white hover:border-green-600 transition-all"
                       >
                         Book Tee Time
                       </button>
                       <button 
                         onClick={() => handleViewMap(course.id, course.name)}
-                        className="btn-secondary text-xs py-2 hover:bg-dark-600"
+                        className="btn-secondary text-xs py-2 hover:bg-dark-600 transition-all"
                       >
                         Course Map
                       </button>
