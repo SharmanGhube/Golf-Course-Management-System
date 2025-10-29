@@ -128,7 +128,7 @@ a {
 /* Form styles */
 .form-input {
   @apply w-full px-3 py-2.5 bg-dark-800 border border-dark-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent transition-all duration-200;
-  min-height: 42px; /* Ensure consistent height for icon alignment */
+  min-height: 44px; /* Ensure consistent height for icon alignment */
 }
 
 .form-label {
@@ -141,15 +141,17 @@ a {
 }
 
 .form-input-with-icons {
-  @apply form-input pl-10 pr-10;
+  @apply form-input pl-10 pr-12;
 }
 
 .form-icon-left {
-  @apply absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none;
+  @apply absolute top-0 bottom-0 left-0 pl-3 flex items-center pointer-events-none;
+  height: 44px; /* Match input height */
 }
 
 .form-icon-right {
-  @apply absolute inset-y-0 right-0 pr-3 flex items-center;
+  @apply absolute top-0 bottom-0 right-0 pr-3 flex items-center cursor-pointer;
+  height: 44px; /* Match input height */
 }
 
 /* Card styles */
