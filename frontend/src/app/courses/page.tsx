@@ -132,7 +132,7 @@ export default function CoursesPage() {
         </motion.div>
 
         {/* Courses Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-6 max-w-[1600px] mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-[1400px] mx-auto">
           {courses?.map((course, index) => {
             const isExpanded = expandedCourse === course.id
             
